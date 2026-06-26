@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Jitu | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html, body{
+    height:100%;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#07070c;
+    color:white;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+}
+
+section{
+    scroll-snap-align:start;
+}
+
+/* ================= PAGE 1 : WELCOME ================= */
+.welcome-page{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.welcome-page h1{
+    font-size:5rem;
+    font-weight:600;
+    letter-spacing:3px;
+}
+
+.welcome-page span{
+    color:#8b5cf6;
+}
+
+/* ================= PAGE 2 : ABOUT ================= */
+.about-page{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 10%;
+    gap:60px;
+}
+
+.about-left img{
+    width:340px;
+    border-radius:30px;
+    box-shadow:0 0 90px rgba(139,92,246,0.45);
+}
+
+.about-card{
+    max-width:600px;
+    background:rgba(255,255,255,0.05);
+    padding:40px;
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(15px);
+}
+
+.about-card h2{
+    color:#8b5cf6;
+    margin-bottom:20px;
+    font-size:2rem;
+}
+
+.about-card p{
+    line-height:1.9;
+    color:#d1d5db;
+    font-size:15px;
+}
+
+/* ================= PAGE 3 : HOBBIES + STATS ================= */
+.hobbies-page{
+    height:100vh;
+    padding:0 10%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:80px;
+}
+
+.hobbies-left h2{
+    font-size:3rem;
+    margin-bottom:40px;
+}
+
+.hobby-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.hobby{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 18px;
+    border-radius:14px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    color:#d1d5db;
+    width:fit-content;
+    font-size:14px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(2,220px);
+    gap:30px;
+}
+
+.stat-card{
+    background:rgba(255,255,255,0.04);
+    padding:30px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.stat-number{
+    font-size:2.4rem;
+    color:#8b5cf6;
+    font-weight:600;
+}
+
+.stat-text{
+    margin-top:8px;
+    color:#9ca3af;
+    font-size:14px;
+}
+
+/* ================= PAGE 4 : INTRO / CONNECT ================= */
+.intro-page{
+    height:100vh;
+    padding:0 10%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+}
+
+.intro-left{
+    max-width:55%;
+}
+
+.intro-left h1{
+    font-size:3.2rem;
+    line-height:1.3;
+}
+
+.intro-left h1 span{
+    background:linear-gradient(90deg,#8b5cf6,#22d3ee);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.intro-role{
+    margin:20px 0;
+    color:#8b5cf6;
+    font-size:1.2rem;
+}
+
+.intro-desc{
+    color:#d1d5db;
+    line-height:1.9;
+    font-size:15px;
+    margin-bottom:30px;
+}
+
+.intro-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+}
+
+.intro-tag{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:8px 18px;
+    border-radius:18px;
+    font-size:13px;
+}
+
+.intro-contact{
+    margin-top:30px;
+    color:#9ca3af;
+    font-size:14px;
+}
+
+.intro-social{
+    margin-top:20px;
+}
+
+.intro-social a{
+    margin-right:20px;
+    color:#8b5cf6;
+    text-decoration:none;
+    font-size:15px;
+}
+
+.intro-right img{
+    width:360px;
+    border-radius:30px;
+    box-shadow:0 0 100px rgba(139,92,246,0.45);
+}
+
+/* ================= PAGE 5 : PROJECTS  ================= */
+.projects-page{
+    min-height:100vh;
+    padding:80px 10%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;      /* 🔥 MAIN FIX */
+    justify-content:center;
+}
+
+.projects-page h2{
+    font-size:3rem;
+    margin-bottom:60px;
+    text-align:center;       /* 🔥 MAIN FIX */
+}
+
+.projects{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,320px));
+    gap:30px;
+    justify-content:center;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    padding:35px;
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 40px rgba(139,92,246,0.35);
+}
+/* ================= 6 page IVY SKILLS GLASS ================= */
+.skills-glass-page{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.skills-glass-page h2{
+    font-size:3rem;
+    margin-bottom:10px;
+    background:linear-gradient(90deg,#8b5cf6,#22d3ee);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.skills-sub{
+    color:#9ca3af;
+    font-size:14px;
+    margin-bottom:40px;
+}
+
+.glass-card{
+    position:relative;
+    width:520px;
+    height:380px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:26px;
+    backdrop-filter:blur(18px);
+    box-shadow:0 0 60px rgba(139,92,246,0.25);
+    transform:perspective(1000px) rotateX(8deg) rotateY(-8deg);
+}
+
+/* tech icons */
+.tech-item{
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:26px;
+    color:#8b5cf6;
+}
+
+.tech-item span{
+    margin-top:6px;
+    font-size:12px;
+    color:#d1d5db;
+}
+
+/* manual positions (scattered) */
+.t1{ top:30px; left:60px; }
+.t2{ top:40px; right:80px; }
+.t3{ top:140px; left:220px; }
+.t4{ top:200px; right:60px; }
+.t5{ bottom:40px; right:100px; }
+.t6{ bottom:30px; left:90px; }
+.t7{ top:160px; left:70px; }
+.t8{ bottom:120px; left:240px; }
+.t9{ top:120px; right:220px; }
+
+/* hover effect */
+.tech-item:hover{
+    transform:scale(1.15);
+    color:#22d3ee;
+}
+
+/* MOBILE FIX */
+@media(max-width:600px){
+    .glass-card{
+        width:90%;
+        height:340px;
+        transform:none;
+    }
+}
+/* ================================
+   7th page GLOBAL SNAP (agar pehle se nahi hai)
+================================ */
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    scroll-snap-type:y mandatory;
+}
+
+/* ================================
+   7th PAGE PROJECT SECTION
+================================ */
+.projects-7{
+    min-height:100vh;
+    padding:60px 8%;
+    background:#080810;
+    scroll-snap-align:start;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* ================================
+   WRAPPER
+================================ */
+.projects-wrapper{
+    width:100%;
+    display:grid;
+    grid-template-columns:80px 1fr;
+    gap:40px;
+}
+
+/* ================================
+   SIDE TITLE (VERTICAL)
+================================ */
+.side-title{
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    font-size:2.3rem;
+    font-weight:700;
+    color:#aaa;
+    letter-spacing:2px;
+}
+
+/* ================================
+   PROJECT GRID
+================================ */
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+    align-items:center;
+}
+
+/* ================================
+   PROJECT CARD
+================================ */
+.project-card{
+    background:rgba(255,255,255,0.05);
+    border-radius:26px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    transition:0.4s ease;
+    position:relative;
+}
+
+.project-card:hover{
+    transform:translateY(-10px) scale(1.02);
+    box-shadow:0 0 45px rgba(139,92,246,0.35);
+}
+
+/* ================================
+   PROJECT IMAGE
+================================ */
+.project-card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    display:block;
+}
+
+/* ================================
+   CONTENT AREA
+================================ */
+.project-card .content{
+    padding:22px;
+}
+
+.project-card h3{
+    font-size:1.25rem;
+    margin-bottom:8px;
+    color:#fff;
+}
+
+.project-card p{
+    font-size:0.9rem;
+    line-height:1.5;
+    opacity:0.85;
+    color:#ddd;
+}
+
+/* ================================
+   TECH STACK
+================================ */
+.project-card .tech{
+    margin-top:10px;
+    font-size:0.85rem;
+    color:#8b5cf6;
+    font-weight:600;
+}
+
+/* ================================
+   LINK BUTTON
+================================ */
+.project-card a{
+    display:inline-block;
+    margin-top:15px;
+    color:#8b5cf6;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.project-card a:hover{
+    color:#fff;
+}
+
+/* ================================
+   GLOW BORDER EFFECT
+================================ */
+.project-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:26px;
+    box-shadow:inset 0 0 0 1px rgba(139,92,246,0.2);
+    opacity:0;
+    transition:0.4s;
+}
+
+.project-card:hover::after{
+    opacity:1;
+}
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+@media(max-width:768px){
+
+    .projects-wrapper{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .side-title{
+        writing-mode:horizontal-tb;
+        transform:none;
+        text-align:center;
+        font-size:2rem;
+        margin-bottom:25px;
+    }
+
+    .projects-7{
+        padding:60px 6%;
+    }
+}
+
+/* ================================
+   EXTRA SMALL DEVICES
+================================ */
+@media(max-width:480px){
+
+    .project-card img{
+        height:180px;
+    }
+
+    .project-card h3{
+        font-size:1.1rem;
+    }
+}
+
+/* ================= PAGE 8 : CORE SKILLS (FIXED) ================= */
+.core-skills-page{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.core-skills-page h2{
+    font-size:3rem;
+    margin-bottom:40px;
+}
+
+.core-skills-container{
+    width:100%;
+    max-width:700px;
+}
+
+.skill{
+    margin-bottom:30px;
+}
+
+.bar{
+    height:10px;
+    background:#1a1a25;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:linear-gradient(90deg,#8b5cf6,#22d3ee);
+}
+
+/* ================= FOOTER ================= */
+footer{
+    padding:80px 0;
+    text-align:center;
+    color:#6b7280;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<section class="welcome-page">
+    <h1>WELCOME TO <span>MY WORLD</span></h1>
+</section>
+
+<!-- ================= PAGE 2 ================= -->
+<section class="about-page">
+    <div class="about-left">
+        <img src="/images/jitu.png" alt="Jitu">
+    </div>
+
+    <div class="about-card">
+        <h2>Who am I?</h2>
+        <p>
+            I'm <b>Jitendra Kumar</b>, a passionate Java Developer specializing in Spring Boot.
+            I enjoy building scalable backend applications and solving complex problems.
+            <br><br>
+            I have completed <b>7+ projects</b> like OneHire, Voice Assistant, Online Voting System, and Feedback System.
+        </p>
+    </div>
+</section>
+
+<!-- ================= PAGE 3 ================= -->
+<section class="hobbies-page">
+    <div class="hobbies-left">
+        <h2>Hobbies</h2>
+        <div class="hobby-list">
+            <div class="hobby">🎧 Listening to Music</div>
+            <div class="hobby">📸 Photography</div>
+            <div class="hobby">🎮 Gaming</div>
+            <div class="hobby">🏋️ Sports & Fitness</div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">7+</div>
+            <div class="stat-text">Projects Completed</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">1+</div>
+            <div class="stat-text">Years Java Experience</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">10+</div>
+            <div class="stat-text">Technologies Used</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">240+</div>
+            <div class="stat-text">Coding Problems Solved</div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= PAGE 4 ================= -->
+<section class="intro-page">
+    <div class="intro-left">
+        <h1>Hi! I'm <span>JITENDRA KUMAR</span></h1>
+        <div class="intro-role">Java Developer | Spring Boot | Backend</div>
+        <p class="intro-desc">
+            I have completed 7+ real-world projects, love solving problems and writing
+            clean, scalable code.
+        </p>
+        <div class="intro-tags">
+            <div class="intro-tag">Core Java</div>
+            <div class="intro-tag">Spring Boot</div>
+            <div class="intro-tag">REST API</div>
+            <div class="intro-tag">MySQL</div>
+            <div class="intro-tag">Hibernate</div>
+        </div>
+        <div class="intro-contact">
+            📧 jitendrakr0550@gmail.com <br>
+            📞 +91 6202662546
+        </div>
+        <div class="intro-social">
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+            <a href="#">Instagram</a>
+        </div>
+    </div>
+    <div class="intro-right">
+        <img src="/images/jitu2.png" alt="Jitu">
+    </div>
+</section>
+
+<!-- ================= PAGE 5 ================= -->
+<section class="projects-page">
+    <h2>My Projects</h2>
+
+    <div class="projects">
+        <div class="card" th:each="p : ${projects}">
+            <h3 th:text="${p.title}">Project</h3>
+            <p th:text="${p.description}">Description</p>
+            <span class="tech" th:text="${p.tech}">Tech</span>
+            <a th:href="${p.github}" target="_blank">GitHub →</a>
+        </div>
+    </div>
+</section>
+  
+<!-- ================= PAGE 6 ================= -->
+<section class="skills-glass-page">
+    <h2>IVY Skills</h2>
+    <p class="skills-sub">
+        Technical expertise blended with creativity — explore my core competencies below.
+    </p>
+
+    <div class="glass-card">
+        <!-- ICONS -->
+        <div class="tech-item t1"><i class="fab fa-java"></i><span>Java</span></div>
+        <div class="tech-item t2"><i class="fab fa-react"></i><span>React</span></div>
+        <div class="tech-item t3"><i class="fab fa-js"></i><span>JavaScript</span></div>
+        <div class="tech-item t4"><i class="fab fa-html5"></i><span>HTML</span></div>
+        <div class="tech-item t5"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+        <div class="tech-item t6"><i class="fas fa-database"></i><span>MySQL</span></div>
+        <div class="tech-item t7"><i class="fab fa-git-alt"></i><span>Git</span></div>
+        <div class="tech-item t8"><i class="fas fa-leaf"></i><span>Spring</span></div>
+    </div>
+</section>
+
+<section class="projects-7 snap">
+    <div class="projects-wrapper">
+
+        <h2 class="side-title">My Projects</h2>
+
+        <div class="projects-grid">
+            <div class="project-card" th:each="p : ${projects}">
+                <img th:src="${p.image}" alt="project"/>
+
+                <div class="content">
+                    <h3 th:text="${p.title}"></h3>
+                    <p th:text="${p.description}"></p>
+
+                    <div class="tech" th:text="${p.tech}"></div>
+
+                    <a th:href="${p.github}" target="_blank">Live →</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="core-skills-page">
+    <h2>Core Skills</h2>
+    <div class="core-skills-container">
+        <div class="skill" th:each="s:${skills}">
+            <div class="skill-head">
+                <span th:text="${s.name}"></span>
+                <span th:text="${s.level+'%'}"></span>
+            </div>
+            <div class="bar">
+                <div class="fill" th:style="'width:'+${s.level}+'%'"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 <span th:text="${name}">Jitu</span> | Java Developer
+</footer>
+
+</body>
+</html>
